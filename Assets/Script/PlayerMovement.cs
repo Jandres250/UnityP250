@@ -46,17 +46,38 @@ public class PlayerMovement : MonoBehaviour
     private void FixedUpdate()
     {
         Vector3 move = new Vector3(moveInput.x, 0, moveInput.y); // Convierte input 2D (x,y) en un vector 3D (x,0,)
-        bool isWalking = move.magnitude > 0.1f; // jugador moviendose (magnitud del vector)
+        
+        //bool isWalking = move.magnitude > 0.1f; // jugador moviendose (magnitud del vector)
+        //animator.SetBool("isWalking", isWalking && !isRunning); // cambia parametro del animator
+        //animator.SetBool("isRunning", isWalking && isRunning); // cambia parametro del animator
 
-        animator.SetBool("isWalking", isWalking && !isRunning); // cambia parametro del animator
-        animator.SetBool("isRunning", isWalking && isRunning); // cambia parametro del animator
+        float targetSpeedParam = 0f;
 
-        if (isWalking) // si se está moviendo (input diferente a 0)
+        if (move.magnitude > 0.1f)
+            targetSpeedParam = isRunning ? 1f : 0.5f;
+
+        float currentSpeedParam = Mathf.Lerp(animator.GetFloat("Speed"), targetSpeedParam, Time.deltaTime * 10f);
+        animator.SetFloat("Speed", currentSpeedParam);
+
+        /*if (isWalking) // si se está moviendo (input diferente a 0)
         {
             move = move.normalized;
 
             float currentSpeed = isRunning ? runSpeed : walkSpeed;
             Vector3 targetPos = rb.position + move * currentSpeed * Time.fixedDeltaTime; // Mueve al jugador en el mundo
+            rb.MovePosition(targetPos);
+
+            Quaternion targetRot = Quaternion.LookRotation(move);
+            Quaternion smoothRot = Quaternion.RotateTowards(rb.rotation, targetRot, rotateSpeed * Time.fixedDeltaTime);
+            rb.MoveRotation(smoothRot);
+        }*/
+
+        if (move.magnitude > 0.1f)
+        {
+            move = move.normalized;
+            float currentSpeed = isRunning ? runSpeed : walkSpeed;
+
+            Vector3 targetPos = rb.position + move * currentSpeed * Time.fixedDeltaTime;
             rb.MovePosition(targetPos);
 
             Quaternion targetRot = Quaternion.LookRotation(move);
