@@ -211,7 +211,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60.000004
+  field of view: 60
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -237,8 +237,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 601191583}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.58604187, y: 0.000000014148493, z: -0.000000010233008, w: 0.8102808}
-  m_LocalPosition: {x: -16.022867, y: 22, z: -104.98}
+  m_LocalRotation: {x: 0.6014527, y: -0.000000098986455, z: 0.000000074521274, w: 0.7989084}
+  m_LocalPosition: {x: -16.022867, y: 25, z: -104.98}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -304,19 +304,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
---- !u!114 &644055432
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 644055428}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e4f1fa1956a69a54db00a5bf00a8d8a8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
-  rotateSpeed: 0.1
 --- !u!95 &644055433
 Animator:
   serializedVersion: 7
@@ -339,6 +326,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &644055434
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 644055428}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4f1fa1956a69a54db00a5bf00a8d8a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -563,7 +562,7 @@ MonoBehaviour:
       Size: {x: 0.8, y: 0.8}
       Offset: {x: 0, y: 0}
   CenterOnActivate: 1
-  TargetOffset: {x: 0, y: 2.8, z: 0}
+  TargetOffset: {x: 0, y: 3, z: 0}
   Damping: {x: 0.5, y: 0.5}
   Lookahead:
     Enabled: 0
@@ -584,11 +583,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineFollow
   TrackerSettings:
     BindingMode: 4
-    PositionDamping: {x: 1, y: 1, z: 1}
+    PositionDamping: {x: 0.6, y: 0.6, z: 0.6}
     AngularDampingMode: 0
     RotationDamping: {x: 1, y: 1, z: 1}
     QuaternionDamping: 1
-  FollowOffset: {x: 0, y: 22, z: -6.33}
+  FollowOffset: {x: 0, y: 25, z: -6.33}
 --- !u!114 &2030327932
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -613,7 +612,7 @@ MonoBehaviour:
     LookAtTarget: {fileID: 0}
     CustomLookAtTarget: 0
   Lens:
-    FieldOfView: 60.000004
+    FieldOfView: 60
     OrthographicSize: 5
     NearClipPlane: 0.3
     FarClipPlane: 1000
@@ -640,8 +639,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2030327929}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.58604187, y: 0.0000000141484895, z: -0.000000010233002, w: 0.8102808}
-  m_LocalPosition: {x: -16.022867, y: 22, z: -104.98}
+  m_LocalRotation: {x: 0.6014527, y: -0.000000098986476, z: 0.000000074521296, w: 0.7989084}
+  m_LocalPosition: {x: -16.022867, y: 25, z: -104.98}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -720,7 +719,7 @@ PrefabInstance:
       addedObject: {fileID: 644055433}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 065c6d2384dc7864cbbc6dd8ad1cde01, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 644055432}
+      addedObject: {fileID: 644055434}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 065c6d2384dc7864cbbc6dd8ad1cde01, type: 3}
       insertIndex: -1
       addedObject: {fileID: 644055431}

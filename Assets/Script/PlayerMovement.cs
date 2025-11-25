@@ -9,8 +9,11 @@ public class PlayerMovement : MonoBehaviour
     private Animator animator; // llamada valor de rotacion leído del InputSystem (AD / Joystick)
     private Rigidbody rb;
 
-    public float rotateSpeed = 120f; // velocidad rotación (grados por segundo)
-    
+    [SerializeField]  private float rotateSpeed; // velocidad rotación (grados por segundo)
+    [SerializeField]  private float walkSpeed; // velocidad al caminar 
+    [SerializeField]  private float runSpeed; // velocidad al correr 
+
+    private bool isRunning;
 
     private void Awake()
     {   
@@ -19,29 +22,41 @@ public class PlayerMovement : MonoBehaviour
         controls.MovePlayer.Move.performed += ctx => moveInput = ctx.ReadValue<Vector2>(); // sistema de movimiento 
         controls.MovePlayer.Move.canceled += ctx => moveInput = Vector2.zero;
     }
-
-    private void OnEnable() => controls.Enable(); // activa sistema de input
     // se activa cuando se llama al objeto
-    private void OnDisable() => controls.Disable(); // desactiva sistema de input
+    private void OnEnable() => controls.Enable(); // activa sistema de 
+
     // se desactiva cuando se deja de llamar al objeto
+    private void OnDisable() => controls.Disable(); // desactiva sistema de input
+   
     private void Start()
     {
         animator = GetComponent<Animator>(); // obtiene el objeto del animator
         rb = GetComponent<Rigidbody>();
+
+        rotateSpeed = 300; // velocidad rotación (grados por segundo)
+        walkSpeed = 3.5f; // velocidad al caminar
+        runSpeed = 10f; // velocidad al correr 
+    }
+
+    private void Update()
+    {
+        isRunning = Keyboard.current.leftShiftKey.isPressed;
     }
 
     private void FixedUpdate()
     {
-        Vector3 move = new Vector3(moveInput.x, 0, moveInput.y); // Convierte input 2D (x,y) en un vector 3D (x,0,z)
-
+        Vector3 move = new Vector3(moveInput.x, 0, moveInput.y); // Convierte input 2D (x,y) en un vector 3D (x,0,)
         bool isWalking = move.magnitude > 0.1f; // jugador moviendose (magnitud del vector)
-        animator.SetBool("isWalking", isWalking); // cambia parametro del animator
-        
+
+        animator.SetBool("isWalking", isWalking && !isRunning); // cambia parametro del animator
+        animator.SetBool("isRunning", isWalking && isRunning); // cambia parametro del animator
+
         if (isWalking) // si se está moviendo (input diferente a 0)
         {
             move = move.normalized;
 
-            Vector3 targetPos = rb.position + move * 3f * Time.fixedDeltaTime; // Mueve al jugador en el mundo
+            float currentSpeed = isRunning ? runSpeed : walkSpeed;
+            Vector3 targetPos = rb.position + move * currentSpeed * Time.fixedDeltaTime; // Mueve al jugador en el mundo
             rb.MovePosition(targetPos);
 
             Quaternion targetRot = Quaternion.LookRotation(move);
